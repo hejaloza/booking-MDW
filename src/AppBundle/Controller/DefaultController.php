@@ -40,7 +40,9 @@ class DefaultController extends Controller
     public function formCrearAction()
     {
     	
-    	return $this->render('AppBundle:Default:crear_habitacion.html.twig');
+    	return $this->render('AppBundle:Default:crear_habitacion.html.twig', array(
+    			'errors'		   => []	
+    	));
     	
     }
     
@@ -75,8 +77,7 @@ class DefaultController extends Controller
     	
     	$repository = $this->getDoctrine()->getRepository('AppBundle:Habitacion');
     	$habitacion = $repository->find($id);	
-    	return $this->render('AppBundle:Default:habitacion.html.twig', array('habitacion' => $habitacion));
-    	
+    	return $this->render('AppBundle:Default:habitacion.html.twig', array('habitacion' => $habitacion, 'errors' => []));
     	
     }
     
