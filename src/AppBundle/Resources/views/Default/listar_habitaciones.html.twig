@@ -1,0 +1,27 @@
+<h1>Listado</h1>
+
+{% for flashMessage in app.session.flashbag.get('succesfull') %}
+
+    {{ flashMessage }}
+
+{% endfor %}
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
+    </tr>
+    {% for habitacion in habitaciones %}
+    <tr>
+        <td>{{ habitacion.id }}</td>
+        <td>{{ habitacion.nombre }}</td>
+        <td>{{ habitacion.descripcion}}</td>
+        <td><a href="{{ path('editarGet', {'id' : habitacion.id} )}}">Modificar</td>
+        <td><a href="{{ path('borrar', {'id' : habitacion.id} )}}">Eliminar</td>
+        
+    </tr>
+    {% endfor %}
+</table>
