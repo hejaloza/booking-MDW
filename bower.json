@@ -1,0 +1,21 @@
+{
+  "name": "booking-MDW",
+  "homepage": "https://github.com/hejaloza/booking-MDW",
+  "authors": [
+    "Abraham Montas <abrahammontas@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
