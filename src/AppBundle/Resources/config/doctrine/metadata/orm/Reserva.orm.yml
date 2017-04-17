@@ -1,0 +1,74 @@
+Reserva:
+    type: entity
+    table: reserva
+    indexes:
+        id_habitacion:
+            columns:
+                - id_habitacion
+        id_cliente:
+            columns:
+                - id_cliente
+        id_hotel:
+            columns:
+                - id_hotel
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        precio:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        fechaInicio:
+            type: datetime
+            nullable: false
+            column: fecha_inicio
+        fechaFin:
+            type: datetime
+            nullable: false
+            column: fecha_fin
+        estado:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+    manyToOne:
+        idHabitacion:
+            targetEntity: Habitacio
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_habitacion:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idCliente:
+            targetEntity: Cliente
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_cliente:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idHotel:
+            targetEntity: Hotel
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_hotel:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,41 @@
+ServicioHabitacion:
+    type: entity
+    table: servicio_habitacion
+    indexes:
+        id_servicio:
+            columns:
+                - id_servicio
+        id_habitacion:
+            columns:
+                - id_habitacion
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        idServicio:
+            targetEntity: Servicio
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_servicio:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idHabitacion:
+            targetEntity: Habitacio
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_habitacion:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

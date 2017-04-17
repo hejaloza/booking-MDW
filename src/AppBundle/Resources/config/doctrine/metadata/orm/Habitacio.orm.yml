@@ -1,0 +1,41 @@
+Habitacio:
+    type: entity
+    table: habitacio
+    indexes:
+        id_tipo:
+            columns:
+                - id_tipo
+        id_hotel:
+            columns:
+                - id_hotel
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        idTipo:
+            targetEntity: TipoHabitacion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_tipo:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idHotel:
+            targetEntity: Hotel
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_hotel:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
