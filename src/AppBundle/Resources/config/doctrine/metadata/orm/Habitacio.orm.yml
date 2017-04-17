@@ -17,6 +17,12 @@ Habitacio:
             id: true
             generator:
                 strategy: IDENTITY
+    fields:
+        estado:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
     manyToOne:
         idTipo:
             targetEntity: TipoHabitacion

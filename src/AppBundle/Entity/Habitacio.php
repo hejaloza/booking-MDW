@@ -22,6 +22,13 @@ class Habitacio
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="integer", nullable=false)
+     */
+    private $estado;
+
+    /**
      * @var \TipoHabitacion
      *
      * @ORM\ManyToOne(targetEntity="TipoHabitacion")
@@ -51,6 +58,30 @@ class Habitacio
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param integer $estado
+     *
+     * @return Habitacio
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return integer
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 
     /**

@@ -57,6 +57,13 @@ class Hotel
     private $codigoPostal;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="min_horas", type="integer", nullable=false)
+     */
+    private $minHoras;
+
+    /**
      * @var \Cadena
      *
      * @ORM\ManyToOne(targetEntity="Cadena")
@@ -196,6 +203,30 @@ class Hotel
     public function getCodigoPostal()
     {
         return $this->codigoPostal;
+    }
+
+    /**
+     * Set minHoras
+     *
+     * @param integer $minHoras
+     *
+     * @return Hotel
+     */
+    public function setMinHoras($minHoras)
+    {
+        $this->minHoras = $minHoras;
+
+        return $this;
+    }
+
+    /**
+     * Get minHoras
+     *
+     * @return integer
+     */
+    public function getMinHoras()
+    {
+        return $this->minHoras;
     }
 
     /**

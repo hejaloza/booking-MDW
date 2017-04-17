@@ -45,6 +45,12 @@ Hotel:
             options:
                 unsigned: false
             column: codigo_postal
+        minHoras:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: min_horas
     manyToOne:
         idCadena:
             targetEntity: Cadena

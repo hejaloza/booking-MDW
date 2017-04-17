@@ -57,6 +57,13 @@ class Hotel
     private $codigoPostal;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="min_horas", type="integer", nullable=false)
+     */
+    private $minHoras;
+
+    /**
      * @var \Cadena
      *
      * @ORM\ManyToOne(targetEntity="Cadena")
