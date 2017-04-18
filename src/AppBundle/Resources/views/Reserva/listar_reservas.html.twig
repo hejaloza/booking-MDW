@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+         <div class="col-sm-12 col-md-12 main">
+          <h2 class="sub-header">Lista de Reservas</h2>
+
+          {% for flashMessage in app.session.flashbag.get('succesfull') %}
+                <div class='alert alert-success'>
+                    {{ flashMessage }}
+                </div>
+          {% endfor %}
+          
+          <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Habitacion</th>
+                    <th>Hotel</th>
+                    <th>Cliente</th>
+                    <th>Precio</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Estado</th> 
+                    <th></th>
+                </tr>
+                {% for reserva in reservas %}
+                <tr>
+                    <td>{{ reserva.id }}</td>
+                    <td>{{ reserva.idHabitacion.idTipo.tipo }}</td>
+                    <td>{{ reserva.idHotel.nombre }}</td>
+                    <td>{{ reserva.idCliente.nombre }} {{ reserva.idCliente.apellidos }}</td>
+                    <td>{{ reserva.precio }}</td>
+                    <td>{{ reserva.fechaInicio | date('d-m-Y \\- H:i') }}</td>
+                    <td>{{ reserva.fechaFin | date('d-m-Y \\- H:i')}}</td>
+                                    
+                    {% if reserva.estado == "0" %} 
+                        <td>Pendiente</td>
+                    {% elseif reserva.estado =="1" %}
+                        <td>En curso</td>
+                    {% elseif reserva.estado =="2" %}
+                        <td>Finalizada</td>
+                    {% elseif reserva.estado =="3" %}
+                        <td>Cancelada</td>
+                    {% endif %}
+                    <td>
+                        <a class="btn btn-danger" href="{{ path('cancelarReserva', {'id' : reserva.id} )}}">Cancelar Reserva
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+        </div>
+
+{% endblock %}
