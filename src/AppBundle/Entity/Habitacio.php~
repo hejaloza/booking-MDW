@@ -29,6 +29,13 @@ class Habitacio
     private $estado;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="numero", type="string", length=10, nullable=false)
+     */
+    private $numero;
+
+    /**
      * @var \TipoHabitacion
      *
      * @ORM\ManyToOne(targetEntity="TipoHabitacion")
