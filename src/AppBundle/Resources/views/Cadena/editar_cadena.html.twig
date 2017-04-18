@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-lg-4">
+          <h2 class="sub-header">Editar cadena</h2>
+            <form action="{{ path('editarCadenaPost', {'id' : cadena.id} )}}" method="POST">
+              <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{cadena.nombre }}">
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Responsable:</label>
+                <input type="text" class="form-control" id="responsable" name="responsable" value="{{cadena.responsable }}">
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Logotipo:</label>
+                <input type="text" class="form-control" id="logotipo" name="logotipo" value="{{cadena.logotipo }}">
+              </div>
+              <button type="submit" class="btn btn-default">Guardar</button>
+            </form>
+            <br>
+        </div>          
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-lg-4">
+            {% if errors|length > 0 %}
+                <div class="alert alert-danger">
+                        <ul>
+                        {% for error in errors %}
+                           <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>  
+
+</div>
+
+
+{% endblock %}

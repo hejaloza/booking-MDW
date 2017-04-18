@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+         <div class="col-sm-12 col-md-12 main">
+         <a class="btn btn-warning" href="{{ path('crearCadena')}}">Crear cadena</a>
+         <hr>
+          <h2 class="sub-header">Lista de Cadenas</h2>
+
+          {% for flashMessage in app.session.flashbag.get('succesfull') %}
+                <div class='alert alert-success'>
+                    {{ flashMessage }}
+                </div>
+          {% endfor %}
+          
+          <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Responsable</th>
+                    <th>Logotipo</th>
+                    <th></th>
+                </tr>
+                {% for cadena in cadenas %}
+                <tr>
+                    <td>{{ cadena.id }}</td>
+                    <td>{{ cadena.nombre }}</td>
+                    <td>{{ cadena.responsable }}</td>
+                    <td>{{ cadena.logotipo }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('editarCadenaGet', {'id' : cadena.id} )}}">Modificar
+                        <a class="btn btn-danger" href="{{ path('borrarCadena', {'id' : cadena.id} )}}">Eliminar
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+        </div>
+
+{% endblock %}
