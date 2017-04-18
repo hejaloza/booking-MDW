@@ -29,13 +29,6 @@ class Habitacio
     private $estado;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="numero", type="string", length=10, nullable=false)
-     */
-    private $numero;
-
-    /**
      * @var \TipoHabitacion
      *
      * @ORM\ManyToOne(targetEntity="TipoHabitacion")
@@ -89,30 +82,6 @@ class Habitacio
     public function getEstado()
     {
         return $this->estado;
-    }
-
-    /**
-     * Set numero
-     *
-     * @param string $numero
-     *
-     * @return Habitacio
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
-    /**
-     * Get numero
-     *
-     * @return string
-     */
-    public function getNumero()
-    {
-        return $this->numero;
     }
 
     /**
