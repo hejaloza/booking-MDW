@@ -31,7 +31,7 @@ class Habitacio
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=10, nullable=false)
+     * @ORM\Column(name="numero", type="string", length=50, nullable=false)
      */
     private $numero;
 

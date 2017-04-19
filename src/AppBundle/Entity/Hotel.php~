@@ -1,0 +1,78 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Hotel
+ *
+ * @ORM\Table(name="hotel", indexes={@ORM\Index(name="id_cadena", columns={"id_cadena"})})
+ * @ORM\Entity
+ */
+class Hotel
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=100, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=100, nullable=false)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="responsable", type="string", length=100, nullable=false)
+     */
+    private $responsable;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="precio_hora", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $precioHora;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="codigo_postal", type="integer", nullable=false)
+     */
+    private $codigoPostal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="min_horas", type="integer", nullable=false)
+     */
+    private $minHoras;
+
+    /**
+     * @var \Cadena
+     *
+     * @ORM\ManyToOne(targetEntity="Cadena")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_cadena", referencedColumnName="id")
+     * })
+     */
+    private $idCadena;
+
+
+}
+
