@@ -9,12 +9,10 @@ class ReservaControllerTest extends WebTestCase
     public function testListarReservas()
     {
     	$client = static::createClient();
-    	$repository = $this->getDoctrine()->getRepository('AppBundle:Reserva');
-    	$reservas = $repository->findAll()->count();
     	
     	$crawler = $client->request('GET', '/listarReservas');
     	
-    	$this->assertEquals(200, $cllient->getResponse()->getStatusCode());
-    	$this->assertEquals($reservas + 1, $crawler->filter('html:contains("</tr>")')->count());
+    	$this->assertEquals(200, $client->getResponse()->getStatusCode());
+    	$this->assertGreaterThan(0, $crawler->filter('html:contains("pepe")')->count());
     }
 }
