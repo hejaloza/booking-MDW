@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
 
 
@@ -21,17 +20,25 @@
 								<input type="hidden" id="id_reserva" name="id_reserva"
 									value="{{id_reserva}}">
 								<div class="form-group">
-									<label for="fecha_entrada">Entrada:</label> <input type="text"
-										class="form-control" id="fecha_entrada" name="fecha_entrada"
-										value="{{ fecha_entrada }}">
-								</div>
+                                    <label for="fromDate">Entrada:</label>                
+                                    <div class='input-group date' id='fecha_entrada'>
+                                        <input type='text' class="form-control" value="{{ fecha_entrada }}" placeholder="{{ fecha_entrada }}"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                 </div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="fecha_salida">Salida:</label> <input type="text"
-										class="form-control" id="fecha_salida" name="fecha_salida"
-										value="{{ fecha_salida }}">
-								</div>
+                                    <label for="fromDate">Salida:</label>                
+                                    <div class='input-group date' id='fecha_salida'>
+                                        <input type='text' class="form-control" value="{{ fecha_salida }}" placeholder="{{ fecha_salida }}"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                 </div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
@@ -113,7 +120,7 @@
 		<div class="col-md-offset-5">
 			<button id="btn_modificar_reserva" type="submit" class="btn btn-default">Modificar</button>
 			&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-default"
-				href="{{ path('homepage')}}">Cancelar</a>
+				href="{{ path('listarReservas')}}">Cancelar</a>
 
 		</div>
 	</div>
@@ -126,9 +133,13 @@ $(document).ready(function() {
 	$("#btn_modificar_reserva").prop("disabled",true);
 	$("#img_disponibilidad").hide();
 	$("#img_no_disponibilidad").hide();
-   
 
 }());
+
+    $(function () {
+        $('#fecha_entrada').datetimepicker();
+        $('#fecha_salida').datetimepicker();
+    });
 	function validar_disponibilidad() {
 
 		var id_reserva = $("#id_reserva").val();

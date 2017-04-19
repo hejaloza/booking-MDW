@@ -163,14 +163,14 @@ class ReservaController extends Controller
     
     
     /**
-     * @Route("/modificar_reserva", name="modificarReservaGet")
+     * @Route("/modificarReservaGet/{id}", name="modificarReservaGet")
      *
      * @method ({"GET"})
      */
-    public function formModificarReservaAction() {
+    public function formModificarReservaAction($id) {
     	
     	$repository = $this->getDoctrine ()->getRepository ( 'AppBundle:Reserva' );
-    	$reserva = $repository->find ( 3 );
+    	$reserva = $repository->find ( $id );
     	$id_reserva=$reserva->getId();
     	$fecha_entrada=($reserva->getFechaInicio())->format('Y-m-d H:i:s');
     	$fecha_salida=($reserva->getFechaFin())->format('Y-m-d H:i:s');
@@ -234,7 +234,7 @@ class ReservaController extends Controller
     
     
     /**
-     * @Route("/modificar_reserva", name="modificarReservaPost")
+     * @Route("/modificarReservaPost", name="modificarReservaPost")
      *
      * @method ({"POST"})
      */

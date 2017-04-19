@@ -49,7 +49,8 @@
                         <td>Cancelada</td>
                     {% endif %}
                     <td>
-                        <a class="btn btn-danger" href="{{ path('cancelarReserva', {'id' : reserva.id} )}}">Cancelar Reserva
+                        <a class="btn btn-danger" href="{{ path('cancelarReserva', {'id' : reserva.id} )}}">Cancelar Reserva 
+                        &nbsp;&nbsp;<a class="btn btn-primary" href="{{ path('modificarReservaGet', {'id' : reserva.id} )}}">Modificar Reserva
                     </td>
                 </tr>
                 {% endfor %}
