@@ -26,9 +26,15 @@
                 {% for reserva in reservas %}
                 <tr>
                     <td>{{ reserva.id }}</td>
-                    <td>{{ reserva.idHabitacion.idTipo.tipo }}</td>
-                    <td>{{ reserva.idHotel.nombre }}</td>
-                    <td>{{ reserva.idCliente.nombre }} {{ reserva.idCliente.apellidos }}</td>
+                    {% if (reserva.idHabitacion == null) %} <td>Habitación borrada</td>
+                    {%  else %} <td>{{ reserva.idHabitacion.idTipo.tipo }}</td>
+                    {%  endif %}
+                    {% if (reserva.idHotel == null) %} <td>Hotel borrado</td>
+                    {%  else %} <td>{{ reserva.idHotel.nombre }}</td>
+                    {%  endif %}
+                       {% if (reserva.idCliente == null) %} <td>Cliente borrado</td>
+                    {%  else %} <td>{{ reserva.idCliente.nombre }} {{ reserva.idCliente.apellidos }}</td>
+                    {%  endif %}
                     <td>{{ reserva.precio }}</td>
                     <td>{{ reserva.fechaInicio | date('d-m-Y \\- H:i') }}</td>
                     <td>{{ reserva.fechaFin | date('d-m-Y \\- H:i')}}</td>
