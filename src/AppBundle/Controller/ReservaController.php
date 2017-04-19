@@ -172,8 +172,10 @@ class ReservaController extends Controller
     	$repository = $this->getDoctrine ()->getRepository ( 'AppBundle:Reserva' );
     	$reserva = $repository->find ( $id );
     	$id_reserva=$reserva->getId();
-    	$fecha_entrada=($reserva->getFechaInicio())->format('Y-m-d H:i:s');
-    	$fecha_salida=($reserva->getFechaFin())->format('Y-m-d H:i:s');
+    	$entrada=$reserva->getFechaInicio();
+    	$salida=$reserva->getFechaFin();
+    	$fecha_entrada=$entrada->format('Y-m-d H:i:s');
+    	$fecha_salida=$salida->format('Y-m-d H:i:s');
     	$nombre_hotel = $reserva->getIdHotel ()->getNombre ();
     	$tipo_habitacion = $reserva->getIdHabitacion ()->getIdTipo ()->getTipo ();
     	$direccion_hotel = $reserva->getIdHotel ()->getDireccion ();

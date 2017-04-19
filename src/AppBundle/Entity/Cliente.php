@@ -33,7 +33,7 @@ class Cliente
      *
      * @ORM\Column(name="contraseÃ±a", type="string", length=100, nullable=false)
      */
-    private $contraseã±a;
+    private $contraseÃ±a;
 
     /**
      * @var string
@@ -114,27 +114,27 @@ class Cliente
     }
 
     /**
-     * Set contraseã±a
+     * Set contraseï¿½a
      *
-     * @param string $contraseã±a
+     * @param string $contraseÃ±a
      *
      * @return Cliente
      */
-    public function setContraseã±a($contraseã±a)
+    public function setContraseÃ±a($contraseÃ±a)
     {
-        $this->contraseã±a = $contraseã±a;
+        $this->contraseÃ±a = $contraseÃ±a;
 
         return $this;
     }
 
     /**
-     * Get contraseã±a
+     * Get contraseÃ±a
      *
      * @return string
      */
-    public function getContraseã±a()
+    public function getContraseÃ±a()
     {
-        return $this->contraseã±a;
+        return $this->contraseÃ±a;
     }
 
     /**
