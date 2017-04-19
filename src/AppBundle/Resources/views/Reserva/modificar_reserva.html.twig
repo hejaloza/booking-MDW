@@ -21,8 +21,8 @@
 									value="{{id_reserva}}">
 								<div class="form-group">
                                     <label for="fromDate">Entrada:</label>                
-                                    <div class='input-group date' id='fecha_entrada'>
-                                        <input type='text' class="form-control" value="{{ fecha_entrada }}" placeholder="{{ fecha_entrada }}"/>
+                                    <div class='input-group date' id='cont_fecha_entrada'>
+                                        <input type='text' id='fecha_entrada' class="form-control" value="{{ fecha_entrada }}" placeholder="{{ fecha_entrada }}"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -32,8 +32,8 @@
 							<div class="col-md-4">
 								<div class="form-group">
                                     <label for="fromDate">Salida:</label>                
-                                    <div class='input-group date' id='fecha_salida'>
-                                        <input type='text' class="form-control" value="{{ fecha_salida }}" placeholder="{{ fecha_salida }}"/>
+                                    <div class='input-group date' id='cont_fecha_salida'>
+                                        <input type='text' id='fecha_salida' class="form-control" value="{{ fecha_salida }}" placeholder="{{ fecha_salida }}"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -136,9 +136,16 @@ $(document).ready(function() {
 
 }());
 
+
+
     $(function () {
-        $('#fecha_entrada').datetimepicker();
-        $('#fecha_salida').datetimepicker();
+
+        $('#cont_fecha_entrada').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+        $('#cont_fecha_salida').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     });
 	function validar_disponibilidad() {
 
@@ -146,6 +153,7 @@ $(document).ready(function() {
 		var fecha_entrada = $("#fecha_entrada").val();
 		var fecha_salida = $("#fecha_salida").val();
 		var horas = $("#horas").val();
+				
 		var urlGetCategories = "http://localhost:8000/validarDisponibilidad"
 				+ "/" + id_reserva + "/" + fecha_entrada + "/" + fecha_salida + "/" + horas;
 		$.get(urlGetCategories, {})

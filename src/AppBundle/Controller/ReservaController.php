@@ -253,7 +253,7 @@ class ReservaController extends Controller
     	$em->persist ( $reserva );
     	$em->flush ();
     	$this->get ( 'session' )->getFlashBag ()->set ( 'succesfull', 'Reserva Modificada' );
-    	return $this->redirectToRoute ( 'homepage' );
+    	return $this->redirectToRoute ( 'listarReservas' );
     }
     
     
