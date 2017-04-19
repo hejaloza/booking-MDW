@@ -121,6 +121,20 @@ class DefaultController extends Controller
     	return $this->redirectToRoute('listar');
     }
     
-     
+    /**
+     * @Route("/search", name="searchRoom")
+     * @Method({"POST"})
+     */
+    public function searchRoom(Request $request)
+    {
+    	$em = $this->getDoctrine()->getManager();
+
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	$habitaciones = $em->getRepository('AppBundle:Habitacion')
+    	->findSearch($request->request->get('search'), $request->request->get('search'), $request->request->get('search'));
+    	
+    	return $habitaciones;
+    }
     
 }
