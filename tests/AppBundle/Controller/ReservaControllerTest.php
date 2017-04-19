@@ -4,7 +4,7 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CadenaControllerTest extends WebTestCase
+class ReservaControllerTest extends WebTestCase
 {
     public function testListarReservas()
     {
