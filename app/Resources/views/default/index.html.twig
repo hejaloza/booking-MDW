@@ -3,16 +3,16 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <form class="form-inline" action="{{ path('crearCadenaPost') }}" method="POST">
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="queryText" placeholder="Search...">
+                    <form action="{{ path('crearCadenaPost') }}" method="POST">
+                      <div class="form-group col-sm-10">
+                        <input type="text" class="form-control" id="search" placeholder="Search...">
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-sm-4">
                         <label for="fromDate">From</label>                
                         <div class='input-group date' id='datetimepicker1'>
                             <input type='text' class="form-control" />
@@ -21,7 +21,7 @@
                             </span>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-sm-4">
                         <label for="toDate">To</label>
                         <div class='input-group date' id='datetimepicker2'>
                             <input type='text' class="form-control" />
