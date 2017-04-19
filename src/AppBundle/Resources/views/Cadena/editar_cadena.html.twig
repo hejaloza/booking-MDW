@@ -8,15 +8,15 @@
             <form action="{{ path('editarCadenaPost', {'id' : cadena.id} )}}" method="POST">
               <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="{{cadena.nombre }}">
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{cadena.nombre }}" required>
               </div>
               <div class="form-group">
                 <label for="descripcion">Responsable:</label>
-                <input type="text" class="form-control" id="responsable" name="responsable" value="{{cadena.responsable }}">
+                <input type="text" class="form-control" id="responsable" name="responsable" value="{{cadena.responsable }}" required>
               </div>
               <div class="form-group">
                 <label for="descripcion">Logotipo:</label>
-                <input type="text" class="form-control" id="logotipo" name="logotipo" value="{{cadena.logotipo }}">
+                <input type="text" class="form-control" id="logotipo" name="logotipo" value="{{cadena.logotipo }}" required>
               </div>
               <button type="submit" class="btn btn-default">Guardar</button>
             </form>
