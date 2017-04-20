@@ -121,6 +121,25 @@ class DefaultController extends Controller
     	return $this->redirectToRoute('listar');
     }
     
-     
+    /**
+     * @Route("/searchByZipCode", name="searchRoomZipCode")
+     * @Method({"POST"})
+     */
+    public function searchRoomByZipCode(Request $request)
+    {
+    	$search = $request->request->get('search');
+    	$from = $request->request->get('from');
+    	$to = $request->request->get('to');
+    	
+    	$habitacioRepository = $this->getDoctrine()->getRepository('AppBundle:Habitacio');
+    	$habitaciones = $habitacioRepository->searchByZipCode($search, $from, $to);
+    	
+    	echo"<pre>";
+    	print_r($habitaciones);
+    	echo"</pre>";
+    	die;
+    	
+    	return $habitaciones;
+    }
     
 }
