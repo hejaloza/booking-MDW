@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="col-sm-9 col-sm-offset-4 col-md-10 col-md-offset-4 main">
+        <div class="col-lg-4">
+          <h2 class="sub-header">Crea un hotel</h2>
+            <form action="{{ path('crearHotelPost') }}" method="POST">
+              <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Responsable:</label>
+                <input type="text" class="form-control" id="responsable" name="responsable" required>
+              </div>
+               <div class="form-group">
+                <label for="descripcion">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Codigo Postal:</label>
+                <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" required pattern="\d*" minlength="5" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Cadena:</label>
+                <select id="id_cadena" name="id_cadena" required>
+                <option selected="selected" disabled="disabled">Selecciona una cadena</option>
+                {% if cadenas|length > 0 %}
+                    {% for cadena in cadenas %}
+                        <option value={{ cadena.id }}> {{ cadena.nombre }} </option>
+                    {% endfor %}
+                {% endif %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Precio por hora:</label>
+                <input type="number" class="form-control" id="precio_hora" name="precio_hora" required>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Establece el mínimo de horas:</label>
+                <input type="number" class="form-control" id="min_horas" name="min_horas" required>
+              </div>
+              <button type="submit" class="btn btn-default btn-success">Guardar</button>
+            </form>
+            <br>
+        </div>          
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-lg-4">
+            {% if errors|length > 0 %}
+                <div class="alert alert-danger">
+                        <ul>
+                        {% for error in errors %}
+                           <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>  
+
+</div>
+
+
+{% endblock %}
+
