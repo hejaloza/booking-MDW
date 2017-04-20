@@ -152,7 +152,7 @@ class ReservaController extends Controller
     	$reserva->setPrecio ( $precio );
     	$reserva->setFechaInicio ( new DateTime ( $fecha_entrada ) );
     	$reserva->setFechaFin ( new DateTime ( $fecha_salida ) );
-    	$reserva->setEstado ( "1" );
+    	$reserva->setEstado ( "0" );
     	
     	$em = $this->getDoctrine ()->getManager ();
     	$em->persist ( $reserva );
