@@ -134,11 +134,6 @@ class DefaultController extends Controller
     	$habitacioRepository = $this->getDoctrine()->getRepository('AppBundle:Habitacio');
     	$habitaciones = $habitacioRepository->searchByZipCode($search, $from, $to);
     	
-    	echo"<pre>";
-    	print_r($habitaciones);
-    	echo"</pre>";
-    	die;
-    	
     	return $habitaciones;
     }
     

@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <form action="{{ path('crearCadenaPost') }}" method="POST">
+                    <form action="#" id="searchForm">
                       <div class="form-group col-sm-10">
                         <input type="text" class="form-control" id="search" placeholder="Search...">
                       </div>
@@ -41,6 +41,13 @@
             $(function () {
                 $('#datetimepickerFrom').datetimepicker();
                 $('#datetimepickerTo').datetimepicker();
+            });
+
+            $(document).ready(function(){
+                $('#searchForm').on('submit', function(e){
+                    e.preventDefault();
+                    console.log("test");
+                });
             });
         </script>
 {% endblock %}
