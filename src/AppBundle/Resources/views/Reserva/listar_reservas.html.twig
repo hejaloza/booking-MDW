@@ -10,7 +10,7 @@
                 </div>
           {% endfor %}
           
-          <div class="table-responsive">
+          <div class="table-responsive col-md-offset-1 col-md-10">
             <table class="table table-striped">
                 <tr>
                     <th>ID</th>
@@ -32,26 +32,31 @@
                     {% if (reserva.idHotel == null) %} <td>Hotel borrado</td>
                     {%  else %} <td>{{ reserva.idHotel.nombre }}</td>
                     {%  endif %}
-                       {% if (reserva.idCliente == null) %} <td>Cliente borrado</td>
+                    {% if (reserva.idCliente == null) %} <td>Cliente borrado</td>
                     {%  else %} <td>{{ reserva.idCliente.nombre }} {{ reserva.idCliente.apellidos }}</td>
                     {%  endif %}
-                    <td>{{ reserva.precio }}</td>
+                    <td>{{ reserva.precio }}€</td>
                     <td>{{ reserva.fechaInicio | date('d-m-Y \\- H:i') }}</td>
                     <td>{{ reserva.fechaFin | date('d-m-Y \\- H:i')}}</td>
                                     
                     {% if reserva.estado == "0" %} 
-                        <td>Pendiente</td>
+                        <td>Confirmada</td>
                     {% elseif reserva.estado =="1" %}
-                        <td>En curso</td>
-                    {% elseif reserva.estado =="2" %}
-                        <td>Finalizada</td>
-                    {% elseif reserva.estado =="3" %}
                         <td>Cancelada</td>
                     {% endif %}
+                    
+                    {% if ((reserva.idHotel == null) or (reserva.idHabitacion == null) or (reserva.idCliente == null)) and (reserva.estado =="0") %}
                     <td>
                         <a class="btn btn-danger" href="{{ path('cancelarReserva', {'id' : reserva.id} )}}">Cancelar Reserva 
-                        &nbsp;&nbsp;<a class="btn btn-primary" href="{{ path('modificarReservaGet', {'id' : reserva.id} )}}">Modificar Reserva
                     </td>
+                    {% elseif ((reserva.estado=="1")) %}
+                     <td></td>
+                     {% elseif ((reserva.idHotel != null) or (reserva.idHabitacion != null) or (reserva.idCliente != null)) and (reserva.estado =="0")  %}
+                    <td>
+                        <a class="btn btn-danger btn-sm" href="{{ path('cancelarReserva', {'id' : reserva.id} )}}">Cancelar Reserva
+                        <a class="btn btn-primary btn-sm" href="{{ path('modificarReservaGet', {'id' : reserva.id} )}}">Modificar Reserva
+                    </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </table>
