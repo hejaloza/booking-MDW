@@ -36,7 +36,7 @@ class ReservaController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$repository=$em->getRepository('AppBundle:Reserva');
     	$reserva = $repository->find($id);
-    	$reserva->setEstado("3");
+    	$reserva->setEstado("1");
     	$em->persist($reserva);
     	$em->flush();
     	$this->get('session')->getFlashBag()->set('succesfull', 'Reserva cancelada');
