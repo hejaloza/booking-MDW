@@ -23,6 +23,14 @@ class HabitacionRepositoryTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
     }
+    
+    public function testsearchByZipCode()
+    {
+    	$habitacioRepository = $this->em->getRepository('AppBundle:Habitacio');
+    	$habitaciones = $habitacioRepository->searchByZipCode(28009, '2017-04-27 23:59:59', '2017-04-28 23:59:59');
+    	
+    	$this->assertCount(0, $habitaciones);
+    }
 
     /**
      * {@inheritDoc}
