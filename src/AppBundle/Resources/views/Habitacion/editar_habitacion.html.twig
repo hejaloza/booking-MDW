@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-4 main">
+        <div class="col-lg-4">
+          <h2 class="sub-header">Modificar habitación</h2>
+            <form action="{{ path('editarHabitacionPost', {'id' : habitacion.id} )}}" method="POST">              
+              <div class="form-group">
+                <label for="descripcion">Hotel:</label>
+                <select id="hotel" name="hotel" required>
+                <option disabled="disabled">Selecciona un hotel:</option>
+                {% if hoteles|length > 0 %}
+                    {% for hotel in hoteles %}
+                       {% if (hotel.id == habitacion.idHotel.id) %}
+                       <option selected=selected value={{ hotel.id }}> {{ hotel.nombre }} </option>
+                      {% else %}
+                        <option value={{ hotel.id }}> {{ hotel.nombre }} </option>
+                       {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Tipo de habitación:</label>
+                <select id="tipo" name="tipo" required>
+                <option disabled="disabled">Selecciona un tipo:</option>
+                {% if tipos|length > 0 %}
+                    {% for tipo in tipos %}
+                       {% if (tipo.id == habitacion.idTipo.id) %}
+                       <option selected=selected value={{ tipo.id }}> {{ tipo.tipo }} </option>
+                      {% else %}
+                        <option value={{ tipo.id }}> {{ tipo.tipo }} </option>
+                       {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Estado de la habitación:</label>
+                <select id="estado" name="estado" required>
+                <option disabled="disabled">Selecciona un estado:</option>
+                {% if (habitacion.estado == 1) %}
+                    <option selected=selected value=1> Disponible </option>
+                    <option value=0> No Disponible </option>
+                {% else %}
+                <option value=1> Disponible </option>
+                <option selected=selected value=0> No Disponible </option>
+                {% endif %}
+
+                </select>
+                <div class="form-group">
+                    <label for="descripcion">Numero de habitación:</label>
+                    <input type="text" class="form-control" id="numero" name="numero" required value="{{habitacion.numero }}">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-default btn-success">Guardar</button>
+            </form>
+            <br>
+        </div>          
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-lg-4">
+            {% if errors|length > 0 %}
+                <div class="alert alert-danger">
+                        <ul>
+                        {% for error in errors %}
+                           <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>  
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+         <div class="col-sm-12 col-md-10 col-md-offset-1 main">
+         <a class="btn btn-warning" href="{{ path('crearHabitacionGet')}}">Crear habitación</a>
+         <hr>
+          <h2 class="sub-header">Listado de habitaciones</h2>
+          
+          {% for flashMessage in app.session.flashbag.get('succesfull') %}
+                <div class='alert alert-success'>
+                    {{ flashMessage }}
+                </div>
+          {% endfor %}
+          
+          <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Hotel</th>
+                    <th>Número de habitación</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                {% for habitacion in habitaciones %}
+                <tr>
+                    <td>{{ habitacion.id }}</td>
+                    <td>{{ habitacion.idHotel.nombre }}</td>
+                    <td>{{ habitacion.numero }}</td>
+                    <td>{{ habitacion.idTipo.tipo}}</td>
+                    {% if habitacion.estado == 1 %}
+                    <td>Disponible</td>
+                    {% else %}
+                    <td>No Disponible</td>
+                    {% endif %}
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('editarHabitacionGet', {'id' : habitacion.id} )}}">Modificar
+                        <a class="btn btn-danger" href="{{ path('borrarHabitacion', {'id' : habitacion.id} )}}">Eliminar
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+        </div>
+
+{% endblock %}

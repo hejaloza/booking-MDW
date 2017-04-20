@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-4 main">
+        <div class="col-lg-4">
+          <h2 class="sub-header">Crear habitacion</h2>
+            <form action="{{ path('crearHabitacionPost') }}" method="POST">     
+              <div class="form-group">
+                <label for="descripcion">Hotel:</label>
+                <select id="hotel" name="hotel" required>
+                <option selected="selected" disabled="disabled">Selecciona un hotel:</option>
+                {% if hoteles|length > 0 %}
+                    {% for hotel in hoteles %}
+                        <option value={{ hotel.id }}> {{ hotel.nombre }} </option>
+                    {% endfor %}
+                {% endif %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Tipo de habitación:</label>
+                <select id="tipo" name="tipo" required>
+                <option selected="selected" disabled="disabled">Selecciona un tipo:</option>
+                {% if tipos|length > 0 %}
+                    {% for tipo in tipos %}
+                        <option value={{ tipo.id }}> {{ tipo.tipo }} </option>
+                    {% endfor %}
+                {% endif %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Estado de la habitación:</label>
+                <select id="estado" name="estado" required>
+                <option selected="selected" disabled="disabled">Selecciona un estado:</option>
+                <option value=1> Disponible </option>
+                <option value=0> No Disponible </option>
+
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Numero de habitación:</label>
+                <input type="text" class="form-control" id="numero" name="numero" required>
+              </div>
+              
+              <button type="submit" class="btn btn-default btn-success">Guardar</button>
+            </form>
+            <br>
+        </div>          
+</div>
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-lg-4">
+            {% if errors|length > 0 %}
+                <div class="alert alert-danger">
+                        <ul>
+                        {% for error in errors %}
+                           <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>  
+
+</div>
+
+
+{% endblock %}
+
