@@ -122,17 +122,22 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/search", name="searchRoom")
+     * @Route("/searchByZipCode", name="searchRoomZipCode")
      * @Method({"POST"})
      */
-    public function searchRoom(Request $request)
+    public function searchRoomByZipCode(Request $request)
     {
-    	$em = $this->getDoctrine()->getManager();
-
-    	$em = $this->getDoctrine()->getManager();
+    	$search = $request->request->get('search');
+    	$from = $request->request->get('from');
+    	$to = $request->request->get('to');
     	
-    	$habitaciones = $em->getRepository('AppBundle:Habitacion')
-    	->findSearch($request->request->get('search'), $request->request->get('search'), $request->request->get('search'));
+    	$habitacioRepository = $this->getDoctrine()->getRepository('AppBundle:Habitacio');
+    	$habitaciones = $habitacioRepository->searchByZipCode($search, $from, $to);
+    	
+    	echo"<pre>";
+    	print_r($habitaciones);
+    	echo"</pre>";
+    	die;
     	
     	return $habitaciones;
     }
