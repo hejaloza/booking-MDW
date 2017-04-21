@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Habitacion;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
+use DateTime;
 
 class DefaultController extends Controller
 {
@@ -20,126 +22,26 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
     }
-      
-    /**
-     * @Route("/listar", name="listar")
-     */
-    public function listarAction()
-    {
-    	
-    	$repository = $this->getDoctrine()->getRepository('AppBundle:Habitacion');
-    	$habitaciones = $repository->findAll();	
-    	return $this->render('AppBundle:Default:listar_habitaciones.html.twig', array('habitaciones' => $habitaciones));
-    	
-    }
     
     /**
-     * @Route("/crear", name="crearGet")
+     * @Route("/searchByZipCode/{search}/{from}/{to}", name="searchRoomZipCode")
      * @Method({"GET"})
      */
-    public function formCrearAction()
-    {
+    public function searchRoomByZipCode($search, $from, $to)
+    {    	
     	
-    	return $this->render('AppBundle:Default:crear_habitacion.html.twig', array(
-    			'errors'		   => []	
-    	));
+    	$from = new DateTime($from);
+    	$to = new DateTime($to);
     	
-    }
-    
-    
-    /**
-     * @Route("/crear", name="crearPost")
-     * @Method({"POST"})
-     */
-    public function crearAction(Request $request)
-    {
- 		$nombre=$request->request->get('nombre');
- 		$descripcion=$request->request->get('descripcion');
- 		
-    	$habitacion = new Habitacion();
-    	$habitacion->setNombre($nombre);
-    	$habitacion->setDescripcion($descripcion);
+    	$calculo_fecha = $from->diff($to);
+    	$horas = $calculo_fecha->h;
     	
-    	$em = $this->getDoctrine()->getManager();
-    	$em->persist($habitacion);
-    	$em->flush();
-    	$this->get('session')->getFlashBag()->set('succesfull', 'Habitacion Creada');
-    	return $this->redirectToRoute('listar');
-    	
-    }
-    
-    /**
-     * @Route("/editarGet/{id}", name="editarGet")
-     * @Method({"GET"})
-     */
-    public function editarGetAction($id)
-    {
-    	
-    	$repository = $this->getDoctrine()->getRepository('AppBundle:Habitacion');
-    	$habitacion = $repository->find($id);	
-    	return $this->render('AppBundle:Default:habitacion.html.twig', array('habitacion' => $habitacion, 'errors' => []));
-    	
-    }
-    
-    /**
-     * @Route("/editarPost/{id}", name="editarPost")
-     * @Method({"POST"})
-     */
-    public function editarPostAction($id,Request $request)
-    {
-    	$nombre=$request->request->get('nombre');
-    	$descripcion=$request->request->get('descripcion');
-    	
-    	$repository = $this->getDoctrine()->getRepository('AppBundle:Habitacion');
-    	$habitacion = $repository->find($id);	
-
-    	$habitacion->setNombre($nombre);
-    	$habitacion->setDescripcion($descripcion);
-    	
-    	$em = $this->getDoctrine()->getManager();
-    	$em->persist($habitacion);
-    	$em->flush();
-    	$this->get('session')->getFlashBag()->set('succesfull', 'Habitacion Modificada');
-    	return $this->redirectToRoute('listar');
-    	
-    	
-    	
-    }
-    
-    
-    /**
-     * @Route("/borrar/{id}", name="borrar")
-     */
-    public function borrarAction($id)
-    {
-    	$em = $this->getDoctrine()->getManager();
-    	$repository=$em->getRepository('AppBundle:Habitacion');
-    	$habitacion = $repository->find($id);
-    	$em->remove($habitacion);
-    	$em->flush();
-    	$this->get('session')->getFlashBag()->set('succesfull', 'Habitacion borrada');
-    	return $this->redirectToRoute('listar');
-    }
-    
-    /**
-     * @Route("/searchByZipCode", name="searchRoomZipCode")
-     * @Method({"POST"})
-     */
-    public function searchRoomByZipCode(Request $request)
-    {
-    	$search = $request->request->get('search');
-    	$from = $request->request->get('from');
-    	$to = $request->request->get('to');
+    	date_sub($from, date_interval_create_from_date_string('2 hours'));
     	
     	$habitacioRepository = $this->getDoctrine()->getRepository('AppBundle:Habitacio');
-    	$habitaciones = $habitacioRepository->searchByZipCode($search, $from, $to);
+    	$habitaciones = $habitacioRepository->searchByZipCode($search, $from, $to, $horas);
     	
-    	echo"<pre>";
-    	print_r($habitaciones);
-    	echo"</pre>";
-    	die;
-    	
-    	return $habitaciones;
+    	return new Response (json_encode(array ('habitaciones' => $habitaciones)) );
     }
     
 }

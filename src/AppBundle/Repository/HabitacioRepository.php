@@ -7,12 +7,15 @@ use AppBundle\Entity\Habitacio;
 
 class HabitacioRepository extends EntityRepository
 {
-	public function searchByZipCode($search, $from, $to)
+	public function searchByZipCode($search, $from, $to, $horas)
 	{
 		return $this->getEntityManager()
 		->createQuery(
-				'SELECT ha1, ho1 FROM AppBundle:Habitacio ha1
+				'SELECT ha1, ho1, t, c, ho1.precioHora * :horas as total   
+				 FROM AppBundle:Habitacio ha1
             	 JOIN ha1.idHotel ho1
+				 JOIN ha1.idTipo t
+				 JOIN ho1.idCadena c
             	 WHERE ho1.codigoPostal = :zipCode
 				 AND ha1.id NOT IN (
 				
@@ -34,6 +37,7 @@ class HabitacioRepository extends EntityRepository
 				->setParameter('zipCode', $search)
 				->setParameter('from', $from)
 				->setParameter('to', $to)
+				->setParameter('horas', $horas)
 				->getScalarResult();
 				
 	}

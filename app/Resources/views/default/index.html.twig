@@ -5,42 +5,119 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Habitaciones</div>
 
                 <div class="panel-body">
-                    <form action="{{ path('crearCadenaPost') }}" method="POST">
-                      <div class="form-group col-sm-10">
-                        <input type="text" class="form-control" id="search" placeholder="Search...">
-                      </div>
+                    <form action="#" id="searchForm">
                       <div class="form-group col-sm-4">
-                        <label for="fromDate">From</label>                
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" />
+                        <label for="fromDate">Fecha entrada</label>                
+                        <div class='input-group date' id='datetimepickerFrom'>
+                            <input id="fromInput" type='text' class="form-control" required/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
                       </div>
                       <div class="form-group col-sm-4">
-                        <label for="toDate">To</label>
-                        <div class='input-group date' id='datetimepicker2'>
-                            <input type='text' class="form-control" />
+                        <label for="toDate">Fecha salida</label>
+                        <div class='input-group date' id='datetimepickerTo'>
+                            <input id="toInput" type='text' class="form-control" required/>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                      <div class="form-group col-sm-8">
+                        <label for="toDate">Codigo postal</label>
+                        <input id="searchInput" type="text" class="form-control" id="search" placeholder="Search..." required>
+                      </div>
+                      <div class="form-group col-sm-2" style="margin-top:25px;">
+                        <button id="submitBtn" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                      </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    
+    <div class="table-responsive">
+    <table id="roomList" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tipo</th>
+                <th>Hotel</th>
+                <th>Cadena</th>
+                <th>Total</th>
+                <th>Reservar</th>
+            </tr>
+        </thead>
+    </table>
+    </div>
 </div>
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
-                $('#datetimepicker2').datetimepicker();
+                
+                $('#datetimepickerFrom').datetimepicker({
+                	   format: 'YYYY-MM-DD HH:mm:ss',
+                	   minDate: moment()
+                    });
+                $('#datetimepickerTo').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    minDate: moment()
+                 });
+        		  
+            });
+
+            $(document).ready(function(){
+            	
+
+
+            $('#submitBtn').click(function() {
+
+                var search = $('#searchInput').val();
+                var from = $('#fromInput').val();
+                var to = $('#toInput').val();
+                
+                var url = "http://localhost:8000/searchByZipCode/" + search + "/" + from + "/" + to;
+
+                $.get(url, {})
+                .then(
+                        function(respuesta) {
+                        	$("#roomList").find("tr:gt(0)").remove();
+                        	
+                            var data = JSON.parse(respuesta);
+                            console.log(data.habitaciones);
+                            for(var i = 0; i < data.habitaciones.length; i++){
+                            	   $('#roomList').append(
+                                    	   "<tr><td>"+ data.habitaciones[i].ha1_id
+                                    	       +"</td>"
+                                               +"<td>"+
+                                               data.habitaciones[i].t_tipo
+                                               +"</td>"
+                                               +"<td>"+
+                                               data.habitaciones[i].ho1_nombre
+                                               +"</td>"
+                                               +"<td>"+
+                                               data.habitaciones[i].c_nombre
+                                               +"</td>"
+                                               +"<td>"+
+                                               data.habitaciones[i].total
+                                               +"</td>"
+                                               +"<td>"+
+                                               "<a class='btn btn-primary' href='http://localhost:8000/reservar/" + 
+                                               data.habitaciones[i].ha1_id + "/" + 
+                                               data.habitaciones[i].total + "/" +
+                                               from + "/" + 
+                                               to +
+                                               "'>Reservar</a>"
+                                               +"</td>"
+                                    	       +"</tr>");
+                                }                      
+                        });
+                  
+             });
+
             });
         </script>
 {% endblock %}
