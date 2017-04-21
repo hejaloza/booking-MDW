@@ -72,18 +72,18 @@ class ReservaController extends Controller
     }
     
     /**
-     * @Route("/reservar", name="reservarGet")
+     * @Route("/reservar/{id}/{precioTotal}/{fecha_entrada}/{fecha_salida}", name="reservarGet")
      *
      * @method ({"GET"})
      */
-    public function formReservarAction() {
-    	$fecha_entrada = "2017-01-14 14:25:00";
-    	$fecha_salida = "2017-01-14 16:25:00";
+    public function formReservarAction($id,$precioTotal,$fecha_entrada,$fecha_salida) {
+    	$fecha_entrada = $fecha_entrada;
+    	$fecha_salida = $fecha_salida;
     	$calculo_fecha = (new DateTime($fecha_entrada))->diff(new DateTime($fecha_salida));
     	$horas=$calculo_fecha->h;
-    	$precio = 100;
+    	$precio = $precioTotal;
     	$repository = $this->getDoctrine ()->getRepository ( 'AppBundle:Habitacio' );
-    	$habitacion = $repository->find ( 2 );
+    	$habitacion = $repository->find ($id);
     	$id_habitacion = $habitacion->getId ();
     	$tipo_habitacion = $habitacion->getIdTipo ()->getTipo ();
     	$num_habitacion = $habitacion->getNumero();
