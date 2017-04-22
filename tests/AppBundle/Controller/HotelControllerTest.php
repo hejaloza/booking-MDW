@@ -10,7 +10,7 @@ class HotelControllerTest extends WebTestCase
     {
     	$client = static::createClient();
         
-    	$data = array('nombre' => "TestPruebaHotel", 'direccion' => "Direccion Prueba", 'responsable' => "Responsable Prueba", 'id_cadena' => "2", 
+    	$data = array('nombre' => "TestPruebaHotel", 'direccion' => "Direccion Prueba", 'responsable' => "Responsable Prueba", 'id_cadena' => "1", 
         'precio_hora' => "150", 'codigo_postal' => "28008", 'min_horas' => "2");
         
         $client->request('POST', '/crearHotel', $data);
@@ -35,7 +35,7 @@ class HotelControllerTest extends WebTestCase
 
     }
     
-    /*
+    
     public function testEditarHotel()
     {
     	$client = static::createClient();
@@ -57,9 +57,9 @@ class HotelControllerTest extends WebTestCase
     {
     	$client = static::createClient();
     	
-    	$client->request('GET', '/borrarHotel/8');
+    	$client->request('GET', '/borrarHotel/2');
     	$crawler = $client->request('GET', '/listarHoteles');
     	$this->assertEquals(200, $client->getResponse()->getStatusCode());
     	$this->assertEquals(0, $crawler->filter('html:contains("TestPruebaCadena2")')->count());
-    }*/
+    }
 }

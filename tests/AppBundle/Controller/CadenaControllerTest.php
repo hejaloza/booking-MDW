@@ -40,6 +40,9 @@ class CadenaControllerTest extends WebTestCase
     	
     	$crawler = $client->request('GET', '/listarCadenas');
     	
+    	$response = $client->getResponse();
+    	$cadenas = json_decode((string)$response->getContent());
+    	
     	$this->assertEquals(200, $client->getResponse()->getStatusCode());
     	$this->assertGreaterThan(0, $crawler->filter('html:contains("TestPruebaCadena2")')->count());
     }

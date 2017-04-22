@@ -9,7 +9,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         {% block javascripts %}    
-            <script type="text/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script> 
             <script type="text/javascript" src="{{ asset('assets/vendor/moment/min/moment.min.js')}}"></script>
             <script type="text/javascript" src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
             <script type="text/javascript" src="{{ asset('assets/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
@@ -41,19 +41,6 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                        
-                        <!-- Dropdown for menu -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Reservas
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="glyphicon glyphicon-pencil"></i>Add</a></li>
-                                <li><a href="/listarReservas"><i class="glyphicon glyphicon-list-alt"></i> Ver reservas</a></li>
-                            </ul>
-                        </li>
-
                         <!-- Dropdown for Admin Actions -->
                         <li class="dropdown">
 
@@ -61,10 +48,11 @@
                                 Administración
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu"> 
                                 <li><a href="/listarCadenas"><i class="glyphicon glyphicon-list-alt"></i> Cadenas</a></li>
                                 <li><a href="/listarHoteles"><i class="glyphicon glyphicon-list-alt"></i> Hoteles</a></li>
                                 <li><a href="/listarHabitaciones"><i class="glyphicon glyphicon-list-alt"></i> Habitaciones</a></li>
+                                <li><a href="/listarReservas"><i class="glyphicon glyphicon-list-alt"></i> Reservas</a></li>   
                             </ul>
                         </li>
                   </ul>
