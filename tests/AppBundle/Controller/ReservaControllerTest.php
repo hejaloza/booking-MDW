@@ -26,6 +26,16 @@ class ReservaControllerTest extends WebTestCase
     	
     }
     
+    public function testValidarDisponibilidad()
+    {
+    	$client = static::createClient();
+    	
+    	$crawler = $client->request('GET', '/validarDisponibilidad/1/2017-01-01 10:00:00/2017-01-01 12:00:00/2');
+    	
+    	$this->assertEquals(200, $client->getResponse()->getStatusCode());
+    	
+    }
+    
     public function testCrearReserva()
     {
     	$client = static::createClient();
